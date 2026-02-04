@@ -1,0 +1,11 @@
+# This workflow is disabled - building locally instead
+# To enable, rename this file to deploy.yml
+name: Disabled Build and Deploy
+
+on: {}
+
+jobs:
+  disabled:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Workflow disabled"
