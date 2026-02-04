@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bokor&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <div class="nav-logo">
+          <img class="nav-logo-img" src="images/LOUIS.svg" alt="Logo" />
+        </div>
+      </div>
+      <div class="nav-center">
+        <img class="nav-logo-img" src="images/LOGO.svg" alt="Logo" />
+      </div>
+      <div class="nav-right">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+          <img class="inactive" src="images/LOGO.svg" alt="Logo" />
+          <i class="close" aria-hidden="true">&times;</i>
+        </button>
+      </div>
+    </div>
+  </div>
+    <div class="nav-menu" id="nav-menu" aria-hidden="true">
+      <div class="nav-menu-inner">
+        <a class="nav-link" href="index.html#">HOME</a>
+        <div class="nav-item">
+          <div class="nav-link-group">
+            <a class="nav-link" href="index.html#projects-anchor">PROJECTS</a>
+            <button
+              class="nav-subtoggle"
+              type="button"
+              aria-label="Toggle projects menu"
+              aria-expanded="false"
+              aria-controls="projects-submenu"
+            >
+              <span class="nav-subtoggle-icon">+</span>
+            </button>
+          </div>
+          <div class="nav-submenu" id="projects-submenu" aria-hidden="true">
+            <a class="nav-sublink" href="projects.html#tank-project">TANK GAME</a>
+            <a class="nav-sublink" href="projects.html#snake-project">SNAKE REMAKE</a>
+            <a class="nav-sublink" href="projects.html#fighter-project">FIGHTER GAME</a>
+          </div>
+        </div>
+        <a class="nav-link" href="index.html#about-anchor">ABOUT ME</a>
+        <a class="nav-link" href="index.html#gallery-section">GALLERY</a>
+      </div>
+    </div>
+  <section class="projects hero">
+    <div class="rectangular-mask">
+      <div class="rect-intro">
+        <div class="introContainer">
+          <h1 class="introTitle">Crafting Playful Worlds Through Design & Art</h1>
+          <div class="introParagraph">
+            <p>
+              Hi, I'm Louis, a 2024 graduate of Republic Polytechnic with a Diploma in Digital Design 
+              and Development. I'm passionate about game design, where creativity meets logic. With a 
+              background in digital design, coding, and data analysis, I enjoy crafting game 
+              experiences that feel intuitive, engaging, and balanced
+            </p>
+          </div>
+        </div>
+        <div class="imageContainer">
+          <img class="rectMaskImage" src="images/test.jpg" alt="Intro visual" />
+        </div>
+      </div>
+    </div>
+    <div id="projects-anchor" class="projects-anchor" aria-hidden="true"></div>
+    <div class="header-1" id="header-1">
+      <h1 class="background-h1">PROJECTS</h1>
+      <div class="horizontal-grid-spacer"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row image-link" data-position="1">
+          <div class="grid-text">
+            <p>TANK GAME, 2025</p>
+          </div>
+          <div class="grid-image">
+            <a href="projects.html#tank-project">
+              <img src="images/TANK GAME_2.JPG" alt="test" />
+            </a>
+            
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2 image-link" data-position="1">
+          <div class="grid-text">
+            <p>SNAKE REMAKE, 2025</p>
+          </div>
+          <div class="grid-image">
+            <a href="projects.html#snake-project">
+              <img src="images/SNAKE GAME_1.jpg" alt="test" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="2">
+          <h1>
+            I BUILD PROJECTS TO EXPLORE <br>
+            HOW PRODUCTS ENGAGE THEIR<br>
+            AUDIENCES
+          </h1>
+        </div>
+        <div class="horizontal-grid-row-2 image-link" data-position="2">
+          <div class="grid-text">
+              <p>PYGAME STREET FIGHTER, 2022</p>
+            </a>
+          </div>
+          <div class="grid-image">
+            <a href="projects.html#fighter-project">
+            <img src="images/FIGHTER GAME_1.jpg" alt="test" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="3">
+          <div class="grid-text">
+            <p>CITY SKYLINES, 2025(WIP)</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/SUISEI_1.jpg" alt="test" />
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="3">
+          <div class="grid-text">
+            <p>世紀末霸者, 2025</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/TM OPERA_1.jpg" alt="test" />
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer" data-position="4"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="4">
+          <div class="grid-text">
+            <p>WELCOME TO MY PORTFOLIO</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/test 2.jpg" alt="test" />
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="4">
+          <h2>
+            I EXPLORE, PROTOTYPE, AND <br>
+            REVISE UNTIL THE IDEA FEELS  <br>
+            BOTH THOUGHTFUL AND USABLE
+          </h2>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer" data-position="5"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="5">
+          <h2>
+            THESE PROJECTS REFLECT <br>
+            MY PROCESS OF LEARNING, <br>
+            DESIGNING WITH INTENTION
+          </h2>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="5">
+          <div class="grid-text">
+            <p>WELCOME TO MY PORTFOLIO</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/test 2.jpg" alt="test" />
+          </div>
+          
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer"></div>
+    </div>
+
+    <div class="circular-mask"></div>
+
+    <div class="header-2" id="about-anchor">
+      <h1 class="background-h1">ABOUT ME</h1>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="6">
+          <div class="grid-text">
+            <p>ENOSHIMA-OHASHI, 2024</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/BIKE_1.jpg" alt="test" />
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="6">
+          <div class="grid-text">
+            <p>OSAKA AQUARIUM KAIYUKAN, 2024</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/AQUARIUM_1.jpg" alt="test" />
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="7">
+          <h1>
+            I'M LOUIS PUAH, A DESIGNER<br> 
+            FOCUSED ON CRAFTING <br>
+            INTERACTIVE EXPERIENCES <br>
+            THAT FEEL INTUITIVE, <br>
+            ENGAGING, AND BALANCED. 
+          </h1>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="7">
+          <div class="grid-text">
+            <p>SINGAPORE NATIONAL GALLERY,2025</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/COURT_1.JPG" alt="test" />
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="8">
+          <div class="grid-text">
+            <p>WELCOME TO MY PORTFOLIO</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/test 2.jpg" alt="test" />
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="8">
+          <div class="grid-text">
+            <p>WELCOME TO MY PORTFOLIO</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/test 2.jpg" alt="test" />
+          </div>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer" data-position="9"></div>
+      <div class="horizontal-grid-column">
+        <div class="horizontal-grid-row" data-position="9">
+          <div class="grid-text">
+            <p>WELCOME TO MY PORTFOLIO</p>
+          </div>
+          <div class="grid-image">
+            <img src="images/test 2.jpg" alt="test" />
+          </div>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="9">
+          <h1>
+            I LEARN BY BUILDING FOCUSED <br> 
+            PROJECTS, EXPLORING GAME  <br>
+            DEVELOPMENT AND INTERACTIVE <br>
+            SYSTEMS THROUGH ITERATION AND <br>
+            EXPERIMENTATION.
+            
+          </h1>
+        </div>
+      </div>
+      <div class="horizontal-grid-spacer" data-position="10"></div>
+      <div class="horizontal-grid-column" data-position="10">
+        <div class="horizontal-grid-row" data-position="10">
+          <h2>
+            I ENJOY BREAKING IDEAS DOWN <br>
+            INTO SYSTEMS, EXPERIMENTING <br>
+            THROUGH ITERATION, AND <br>
+            LEARNING FROM BOTH MISTAKES <br>
+            AND REFINEMENTS.
+          </h2>
+        </div>
+        <div class="horizontal-grid-row-2" data-position="10">
+          <h2>
+            I'M ALSO PASSIONATE ABOUT <br>
+            PHOTOGRAPHY AND LOVE  <br> 
+            EXPLORING REAL WORLD   <br>
+            LOCATIONS TO GAIN INSPIRATION<br>
+            FOR MY PROJECT WORKS
+          </h2>
+        </div>
+      </div>
+    </div>
+
+    
+    
+
+    <div class="tooltips">
+      <div class="tooltip">
+        <div class="icon">
+        </div>
+        <div class="divider"></div>
+        <div class="title"><h2>WHY I BUILD GAMES</h2></div>
+        <div class="description"><p>I use games as a way to understand control, timing, and decision-making in real time—breaking ideas down into mechanics and rebuilding them through iteration.</p></div>
+      </div>
+
+      <div class="tooltip">
+        <div class="icon"></div>
+        <div class="divider"></div>
+        <div class="title"><h2>LOOKING AHEAD</h2></div>
+        <div class="description"><p>Continuing to explore game development & digital arts through deeper system design, animation, and real-time interaction.</p></div>
+      </div>
+    </div>
+
+    <div class="model-container"></div>
+  </section>
+  <section class="gallery-section" id="gallery-section" data-nav="false">
+    <div id="gallery">
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+          <div class="tile">
+            <img src="images/test 2.jpg" />
+          </div>
+        </div>
+  </section>
+
+  <footer class="outro">
+    <div class="footer-inner">
+      <div class="footer-columns">
+        <div class="footer-col">
+          <p class="footer-eyebrow">MAIN</p>
+          <a class="footer-link" href="#">HOME</a>
+          <a class="footer-link" href="#projects-anchor">PROJECTS</a>
+          <a class="footer-link" href="#about-anchor">ABOUT ME</a>
+          <a class="footer-link" href="#gallery-section">GALLERY</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-eyebrow">PROJECTS</p>
+          <a class="footer-link" href="projects.html#tank-project">TANK</a>
+          <a class="footer-link" href="projects.html#snake-project">SNAKE</a>
+          <a class="footer-link" href="projects.html#fighter-project">STREET FIGHTER</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-eyebrow">CONTACT</p>
+          <a class="footer-link" href="https://github.com/EEIVIEE" aria-label="GitHub (external)">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="footer-link" href="https://mail.google.com/mail/?view=cm&fs=1&to=louispyh@gmail.com" target="_blank" rel="noopener noreferrer">Email <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="footer-meta">
+        <p class="footer-copy">© 2026 Louis Puah. All Rights Reserved.</p>
+        <p class="footer-note">Made with pain and Monster Energy (Ultra).</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script type="module" src="gallery-script.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+<!-- #Rotating 3D Image Carousel
+    <div class="banner">
+        <div class="slider" style="--quantity: 8">
+            <div class="item" style="--position: 1"><img src="images/test.jpg" alt=""></div>
+            <div class="item" style="--position: 2"><img src="images/test 2.jpg" alt=""></div>
+            <div class="item" style="--position: 3"><img src="images/test 3.jpg" alt=""></div>
+            <div class="item" style="--position: 4"><img src="images/test 4.jpg" alt=""></div>
+            <div class="item" style="--position: 5"><img src="images/test.jpg" alt=""></div>
+            <div class="item" style="--position: 6"><img src="images/test 2.jpg" alt=""></div>
+            <div class="item" style="--position: 7"><img src="images/test 3.jpg" alt=""></div>
+            <div class="item" style="--position: 8"><img src="images/test 4.jpg" alt=""></div>
+        </div>
+    </div>
+-->
