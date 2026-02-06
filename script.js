@@ -222,11 +222,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const maskEnd = 0.132;
       const headerStart = maskEnd * 0.1;
-      const headerDuration = 0.5;
-      const circularStart = headerStart + headerDuration - 0.1;
+      const headerDuration = 0.35;
+      const circularStart = headerStart + headerDuration + 0.02;
       const circularDuration = 0.1;
-      const header2Start = circularStart + circularDuration
-      ;
+      const header2Start = circularStart + circularDuration + 0.02;
       const targetScroll =
         pinTrigger.start + (pinTrigger.end - pinTrigger.start) * header2Start;
 
@@ -264,27 +263,30 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------------------------------------
   // 1) SplitText setup (your original intent)
   // ------------------------------------------------------------
-  // Split text into chars and build a reveal timeline.
+  // Split text into words and build a reveal timeline.
   const createCharReveal = (selector, options = {}) => {
     const {
       total = 0.7,
       charDuration = 0.12,
       ease = "power3.out",
+      splitType,
     } = options;
+    const type = splitType ?? "words";
     const split = new SplitText(selector, {
-      type: "chars",
+      type,
       charsClass: "char",
+      wordsClass: "char",
     });
 
-    // Wrap each char in an inner span for reveal motion
-    split.chars.forEach((char) => {
-      char.innerHTML = `<span>${char.innerHTML}</span>`;
+    const units = type === "words" ? split.words : split.chars;
+    units.forEach((unit) => {
+      unit.innerHTML = `<span>${unit.innerHTML}</span>`;
     });
 
-    const charCount = split.chars.length || 1;
+    const unitCount = units.length || 1;
     const stagger =
-      charCount > 1
-        ? Math.max(0, (total - charDuration) / (charCount - 1))
+      unitCount > 1
+        ? Math.max(0, (total - charDuration) / (unitCount - 1))
         : 0;
 
     const tl = gsap.timeline({ paused: true });
@@ -299,40 +301,77 @@ document.addEventListener("DOMContentLoaded", () => {
     return { split, tl };
   };
 
-  const { tl: headerCharTl } = createCharReveal(".header-1 h1", {
-    total: 0.7,
-    charDuration: 0.12,
-  });
+  let headerCharTl = null;
+  let headerCharT2 = null;
+  let headerCharT3 = null;
+  let Header2CharT1 = null;
+  let Header2CharT2 = null;
+  let Header2CharT3 = null;
+  let Header2CharT4 = null;
+  let headerTextSplits = [];
 
-  const { tl: headerCharT2 } = createCharReveal(".horizontal-grid-row-2[data-position=\"4\"] h2", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+  const setupTextSplits = () => {
+    headerTextSplits.forEach(({ split, tl }) => {
+      if (tl) tl.kill();
+      if (split && typeof split.revert === "function") {
+        split.revert();
+      }
+    });
+    headerTextSplits = [];
 
-  const { tl: headerCharT3 } = createCharReveal(".horizontal-grid-row[data-position=\"5\"] h2", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+    let result = createCharReveal(".header-1 h1", {
+      total: 0.7,
+      charDuration: 0.12,
+    });
+    headerCharTl = result.tl;
+    headerTextSplits.push(result);
 
-  const { tl: Header2CharT1 } = createCharReveal(".horizontal-grid-row[data-position=\"7\"] h1", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+    result = createCharReveal(".horizontal-grid-row-2[data-position=\"4\"] h2", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    headerCharT2 = result.tl;
+    headerTextSplits.push(result);
 
-  const { tl: Header2CharT2 } = createCharReveal(".horizontal-grid-row-2[data-position=\"9\"] h1", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+    result = createCharReveal(".horizontal-grid-row[data-position=\"5\"] h2", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    headerCharT3 = result.tl;
+    headerTextSplits.push(result);
 
-  const { tl: Header2CharT3 } = createCharReveal(".horizontal-grid-row[data-position=\"10\"] h2", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+    result = createCharReveal(".horizontal-grid-row[data-position=\"7\"] h1", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    Header2CharT1 = result.tl;
+    headerTextSplits.push(result);
 
-  const { tl: Header2CharT4 } = createCharReveal(".horizontal-grid-row-2[data-position=\"10\"] h2", {
-    total: 0.5,
-    charDuration: 0.12,
-  });
+    result = createCharReveal(".horizontal-grid-row-2[data-position=\"9\"] h1", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    Header2CharT2 = result.tl;
+    headerTextSplits.push(result);
+
+    result = createCharReveal(".horizontal-grid-row[data-position=\"10\"] h2", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    Header2CharT3 = result.tl;
+    headerTextSplits.push(result);
+
+    result = createCharReveal(".horizontal-grid-row-2[data-position=\"10\"] h2", {
+      total: 0.5,
+      charDuration: 0.12,
+    });
+    Header2CharT4 = result.tl;
+    headerTextSplits.push(result);
+
+    ScrollTrigger.refresh();
+  };
+
+  setupTextSplits();
 
 
 
@@ -473,17 +512,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isMobile = window.innerWidth < 1000;
 
+    // Reset base rotation first so centering is stable on resize.
+    model.rotation.set(0, 0, 0);
+    model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(25);
+
     // Center model at origin
     const box = new THREE.Box3().setFromObject(model);
     const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
     model.position.sub(center);
 
     // small offset like tutorial-style
-    model.position.x += isMobile ? modelSize.x * 0 : modelSize.x * 0;
-    model.position.y += -modelSize.y * -0.20;
-
-    model.rotation.set(0, 0, 0);
-    model.rotation.z = isMobile ? 0 : THREE.MathUtils.degToRad(25);
+    model.position.y += size.y * 0.2;
 
     // Keep the JS rotation state aligned with the model after resets (e.g. resize).
     currentRotation = 0;
@@ -492,9 +532,20 @@ document.addEventListener("DOMContentLoaded", () => {
       currentRotation = targetRotation;
     }
 
-    const cameraDistance = isMobile ? 2.2 : 1.35;
-    const maxDim = Math.max(modelSize.x, modelSize.y, modelSize.z);
-    camera.position.set(0, 0, maxDim * cameraDistance);
+    // Fit camera to model + padding so it stays consistent on resize.
+    const fitPadding = isMobile ? 1.35 : 1.15;
+    const rotatedBox = new THREE.Box3().setFromObject(model);
+    const rotatedSize = rotatedBox.getSize(new THREE.Vector3());
+    const fov = THREE.MathUtils.degToRad(camera.fov);
+    const distanceForHeight =
+      (rotatedSize.y * fitPadding) / (2 * Math.tan(fov / 2));
+    const distanceForWidth =
+      (rotatedSize.x * fitPadding) /
+      (2 * Math.tan(fov / 2) * camera.aspect);
+    const cameraDistance =
+      Math.max(distanceForHeight, distanceForWidth) + rotatedSize.z * 0.5;
+
+    camera.position.set(0, 0, cameraDistance);
     camera.lookAt(0, 0, 0);
   }
 
@@ -552,13 +603,27 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   animate();
 
+  let resizeTimer = null;
   window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    setupModel();
+    if (resizeTimer) {
+      window.clearTimeout(resizeTimer);
+    }
+    resizeTimer = window.setTimeout(() => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      setupModel();
+
+      if (typeof lenis?.resize === "function") {
+        lenis.resize();
+      }
+      ScrollTrigger.refresh();
+    }, 150);
   });
+
+  const header1El = document.querySelector(".header-1");
+  const header2El = document.querySelector(".header-2");
 
   // ------------------------------------------------------------
   // 3) ScrollTrigger pinned scene + UI updates
@@ -614,26 +679,31 @@ document.addEventListener("DOMContentLoaded", () => {
       // Header-1 slide (delayed until mask has disappeared)
       const headerStart = maskEnd * 0.1;
 
-      const headerDuration = 0.5;
+      const headerDuration = 0.35;
       const revealSpeed = 10;
       const headerProgress = Math.max(
         0,
         Math.min(1, (progress - headerStart) / headerDuration)
       );
-      const delayT1 = 0.15; // 15% delay
-      const delayT2 = 0.4; // 40% delay
-      const delayT3 = 0.515; //45% delay
+      const delayT1 = 0.05; // 5% delay
+      const delayT2 = 0.25; // 25% delay
+      const delayT3 = 0.35; // 35% delay
       headerCharTl.progress(Math.min(1, (headerProgress - delayT1) * revealSpeed));
       headerCharT2.progress(Math.min(1, (headerProgress - delayT2) * revealSpeed));
       headerCharT3.progress(Math.min(1, (headerProgress - delayT3) * revealSpeed));
-      gsap.set(".header-1", {
-        xPercent:
-          progress < headerStart
-            ? 0
-            : progress > headerStart + headerDuration
-            ? -100
-            : -100 * headerProgress,
-      });
+      const header1Width = header1El
+        ? header1El.scrollWidth || header1El.getBoundingClientRect().width
+        : window.innerWidth;
+      const header1EndX = -header1Width;
+      const header1X =
+        progress < headerStart
+          ? 0
+          : progress > headerStart + headerDuration
+          ? header1EndX
+          : gsap.utils.interpolate(0, header1EndX, headerProgress);
+      if (header1El) {
+        gsap.set(header1El, { x: header1X, xPercent: 0 });
+      }
       // Only move the background heading that belongs to Header-1.
       const bgStart = headerStart;
       const bgDuration = headerDuration * 1.6; // slower than the foreground slide
@@ -651,7 +721,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // Circular mask (delayed until Header-1 has finished sliding)
-      const circularStart = headerStart + headerDuration - 0.1;
+      const circularStart = headerStart + headerDuration + 0.02;
       const circularDuration = 0.1;
       const circularProgress = Math.max(
         0,
@@ -674,8 +744,8 @@ document.addEventListener("DOMContentLoaded", () => {
       
 
       // Header-2 slide
-      const header2Start = circularStart + circularDuration - 0.2;
-      const header2Duration = 0.35;
+      const header2Start = circularStart + circularDuration + 0.02;
+      const header2Duration = 0.25;
       const header2Progress = Math.max(
         0,
         Math.min(1, (progress - header2Start) / header2Duration)
@@ -690,20 +760,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const s = -t * t * t + t * t + t;
         header2Eased = header2EaseStart + s * header2EasePortion;
       }
-      const header2XPercent =
+      const header2Width = header2El
+        ? header2El.scrollWidth || header2El.getBoundingClientRect().width
+        : window.innerWidth;
+      const header2StartX = window.innerWidth;
+      const header2EndX = -header2Width;
+      const header2X =
         progress < header2Start
-          ? 100
+          ? header2StartX
           : progress > header2Start + header2Duration
-          ? -200
-          : 100 - 300 * header2Eased;
-      const delayT1_2 = 0.575;
-      const delayT2_2 = 0.715;
-      const delayT3_2 = 0.75;
+          ? header2EndX
+          : gsap.utils.interpolate(header2StartX, header2EndX, header2Eased);
+      const delayT1_2 = 0.15;
+      const delayT2_2 = 0.4;
+      const delayT3_2 = 0.55;
       Header2CharT1.progress(Math.min(1, (header2Progress - delayT1_2) * revealSpeed));
       Header2CharT2.progress(Math.min(1, (header2Progress - delayT2_2) * revealSpeed));
       Header2CharT3.progress(Math.min(1, (header2Progress - delayT3_2) * revealSpeed));
       Header2CharT4.progress(Math.min(1, (header2Progress - delayT3_2) * revealSpeed));
-      gsap.set(".header-2", { xPercent: header2XPercent });
+      if (header2El) {
+        const header2Visible = progress >= header2Start;
+        gsap.set(header2El, {
+          x: header2X,
+          xPercent: 0,
+          autoAlpha: header2Visible ? 1 : 0,
+        });
+      }
 
       // Divider scaleX must be 0..1 (FIXED: no "%")
       const tooltipStart = header2Start + header2Duration - 0.05;

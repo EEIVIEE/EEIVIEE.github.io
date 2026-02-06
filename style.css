@@ -726,7 +726,7 @@ section{
 }
 
 .horizontal-grid-row[data-position="5"] h2{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .horizontal-grid-row-2[data-position="7"]{
@@ -919,14 +919,38 @@ section{
 
 /* Responsive */
 @media (max-width: 1000px) {
+    p{
+        font-size: 0.75rem;
+    }
+    .introParagraph {
+        padding: 0;
+        left: 0;
+        min-height: 0;
+    }
+
+    .introTitle{
+        font-size: 1.75rem;
+    }
+
     .rect-intro{
         grid-template-columns: 1fr;
         gap: 2rem;
         padding: 2rem;
     }
 
+    .introContainer {
+        gap: 0.5rem;
+    }
+
     .imageContainer{
         min-height: 240px;
+        width: 80%;
+        margin: 0 auto;
+        justify-self: center;
+    }
+
+    .imageContainer img{
+        object-position: 50% 30%;
     }
 }
 
@@ -1058,18 +1082,23 @@ section{
 }
 
 @media (max-width: 1000px) {
+    .background-h1{
+        font-size: 40vw;
+    }
+
     .header-2{
-        position: relative;
-        top: auto;
+        position: fixed;
+        top: 0;
         left: 0;
-        width: 100vw;
-        height: auto;
-        transform: none !important;
+        width: max-content;
+        min-width: 250vw;
+        height: 100svh;
     }
 
     .header-2 > .background-h1{
         left: 0;
         width: 100%;
+        font-size: 35vw;
     }
 
     h1{
@@ -1079,7 +1108,7 @@ section{
 
     h2,
     .tooltip .icon{
-        width: 100%;
+        width: 90%;
         align-items: center;
         flex-direction: column;
         gap: 2rem;
@@ -1089,7 +1118,8 @@ section{
         width: 100%;
         align-items: center;
         flex-direction: column;
-        gap: 2rem;
+        gap: 4rem;
+        height: 90%;
     }
 
     .tooltip{
@@ -1097,8 +1127,8 @@ section{
     }
 
     .tooltips .tooltip:nth-child(2){
-        justify-content: flex-start;
-        align-items: flex-start;
+        justify-content: flex-end;
+        align-items: flex-end;
     }
 
     .tooltip .divider{
@@ -1113,6 +1143,11 @@ section{
     .tooltips .tooltip:nth-child(2) .title{
         width: 100%;
     }
+    
+    .tooltip .description,
+    .tooltip .title{
+        width: 100%;
+    } 
 
 }
 .header-1 .horizontal-grid-spacer:first-child{
