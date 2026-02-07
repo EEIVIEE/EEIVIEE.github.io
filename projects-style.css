@@ -15,7 +15,7 @@ body[data-page="projects"] .outro{
 .projects-hero{
     max-width: 1100px;
     margin: 0 auto;
-    padding: 12vh 8vw 8vh;
+    padding: calc(var(--vh, 1vh) * 12) 8vw calc(var(--vh, 1vh) * 8);
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -39,8 +39,8 @@ body[data-page="projects"] .outro{
 }
 
 .projects-intro{
-    padding: 0 8vw 8vh;
-    height: 75vh;
+    padding: 0 8vw calc(var(--vh, 1vh) * 8);
+    height: calc(var(--vh, 1vh) * 75);
     display: flex;
     align-items: center;
     background: #f2f2f2;
@@ -70,15 +70,16 @@ body[data-page="projects"] .outro{
 .projects-list{
     display: flex;
     flex-direction: column;
-    gap: 10vh;
-    padding: 34vh 8vw 14vh;
+    gap: calc(var(--vh, 1vh) * 10);
+    padding: calc(var(--vh, 1vh) * 34) 8vw calc(var(--vh, 1vh) * 14);
     height: auto;
     overflow: visible;
     background: #f2f2f2;
+    scroll-margin-top: calc(var(--vh, 1vh) * 12);
 }
 
 .projects-list[data-position="1"]{
-    padding-top: 14vh;
+    padding-top: calc(var(--vh, 1vh) * 14);
 }
 
 .projects-list[data-position="2"]{
@@ -152,11 +153,11 @@ body[data-page="projects"] .outro{
 
 @media (max-width: 900px){
     .projects-hero{
-        padding: 10vh 6vw 6vh;
+        padding: calc(var(--vh, 1vh) * 10) 6vw calc(var(--vh, 1vh) * 6);
     }
 
     .projects-intro{
-        padding: 0 6vw 6vh;
+        padding: 0 6vw calc(var(--vh, 1vh) * 6);
     }
 
     .projects-intro-inner{
@@ -164,8 +165,9 @@ body[data-page="projects"] .outro{
     }
 
     .projects-list{
-        gap: 8vh;
-        padding: 0 6vw 12vh;
+        gap: calc(var(--vh, 1vh) * 8);
+        padding: calc(var(--vh, 1vh) * 12) 6vw calc(var(--vh, 1vh) * 12);
+        scroll-margin-top: calc(var(--vh, 1vh) * 14);
     }
 
     .project-row,

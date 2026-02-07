@@ -19,6 +19,51 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 
+  const setVh = () => {
+    const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+    const viewportWidth = window.visualViewport?.width ?? window.innerWidth;
+    document.documentElement.style.setProperty(
+      "--vh",
+      `${viewportHeight * 0.01}px`
+    );
+    document.documentElement.style.setProperty(
+      "--vw",
+      `${viewportWidth * 0.01}px`
+    );
+  };
+
+  const refreshViewport = () => {
+    setVh();
+    if (typeof lenis?.resize === "function") {
+      lenis.resize();
+    }
+    ScrollTrigger.refresh();
+  };
+
+  setVh();
+
+  window.addEventListener("pageshow", (event) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(refreshViewport);
+    });
+    if (event?.persisted) {
+      window.setTimeout(refreshViewport, 50);
+    }
+  });
+
+  window.addEventListener("load", () => {
+    window.setTimeout(refreshViewport, 50);
+  });
+
+  window.addEventListener("orientationchange", () => {
+    window.setTimeout(refreshViewport, 250);
+  });
+
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", refreshViewport);
+    window.visualViewport.addEventListener("scroll", refreshViewport);
+  }
+
   // ------------------------------------------------------------
   // Nav menu animation
   // ------------------------------------------------------------
@@ -189,27 +234,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const projectsLinks = document.querySelectorAll('a[href="#projects-anchor"]');
-  projectsLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const pinTrigger = ScrollTrigger.getById("projects-pin");
+  const isIndexPage = Boolean(document.querySelector(".projects"));
+  if (isIndexPage) {
+    const projectsLinks = document.querySelectorAll('a[href$="#projects-anchor"]');
+    projectsLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const pinTrigger = ScrollTrigger.getById("projects-pin");
       if (!pinTrigger) {
         scrollToElement(document.querySelector("#projects-anchor"));
         closeNavIfOpen();
         return;
       }
 
-      const maskEnd = 0.082;
+      const maskEnd = 0.132;
+      const headerStart = maskEnd * 0.1;
+      const headerDuration = 0.35;
+      const headerTargetT = 0.16;
+      const targetProgress = Math.min(
+        1,
+        headerStart + headerDuration * headerTargetT
+      );
       const targetScroll =
-        pinTrigger.start + (pinTrigger.end - pinTrigger.start) * maskEnd;
+        pinTrigger.start + (pinTrigger.end - pinTrigger.start) * targetProgress;
 
       smoothScrollTo(targetScroll);
       closeNavIfOpen();
     });
   });
 
-  const aboutLinks = document.querySelectorAll('a[href="#about-anchor"]');
+  const aboutLinks = document.querySelectorAll('a[href$="#about-anchor"]');
   aboutLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
@@ -223,21 +277,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const maskEnd = 0.132;
       const headerStart = maskEnd * 0.1;
       const headerDuration = 0.35;
-      const circularStart = headerStart + headerDuration + 0.02;
+      const circularStart = headerStart + headerDuration + 0.005;
       const circularDuration = 0.1;
-      const header2Start = circularStart + circularDuration + 0.02;
+      const header2Start = circularStart;
+      const header2Offset = 0.02;
       const targetScroll =
-        pinTrigger.start + (pinTrigger.end - pinTrigger.start) * header2Start;
+        pinTrigger.start +
+        (pinTrigger.end - pinTrigger.start) * (header2Start + header2Offset);
 
       smoothScrollTo(targetScroll);
       closeNavIfOpen();
     });
   });
 
-  const galleryLinks = document.querySelectorAll('a[href="#gallery-section"]');
-  galleryLinks.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
+    const galleryLinks = document.querySelectorAll('a[href$="#gallery-section"]');
+    galleryLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
       const gallerySection = document.querySelector("#gallery-section");
       if (!gallerySection) return;
 
@@ -257,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
       closeNavIfOpen();
     });
   });
+  }
 
 
 
@@ -609,6 +666,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.clearTimeout(resizeTimer);
     }
     resizeTimer = window.setTimeout(() => {
+      setVh();
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -624,12 +682,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const header1El = document.querySelector(".header-1");
   const header2El = document.querySelector(".header-2");
+  const header1LastElement = header1El?.querySelector(
+    ".horizontal-grid-spacer:last-of-type"
+  );
+  const projectsSection = document.querySelector(".projects");
 
   // ------------------------------------------------------------
   // 3) ScrollTrigger pinned scene + UI updates
   // ------------------------------------------------------------
-  ScrollTrigger.create({
-    trigger: ".projects",
+  if (projectsSection) {
+    ScrollTrigger.create({
+      trigger: projectsSection,
     start: "top top",
     end: () => `+=${window.innerHeight * 10}`,
     pin: true,
@@ -669,9 +732,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Model container scale-in as mask disappears
       const modelScale = Math.min(1, maskProgress * 0.9);
-      gsap.set(".model-container", {
-        scale: modelScale,
-      });
       gsap.set(".rect-intro", {
         scale: 1 - Math.min(1, maskProgress * 1.4),
       });
@@ -721,7 +781,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // Circular mask (delayed until Header-1 has finished sliding)
-      const circularStart = headerStart + headerDuration + 0.02;
+      const circularStart = headerStart + headerDuration + 0.005;
       const circularDuration = 0.1;
       const circularProgress = Math.max(
         0,
@@ -741,7 +801,34 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      
+      // Model shrink once the last Header-1 spacer clears the model center.
+      let modelScaleFade = 1;
+      if (header1LastElement && header1EndX !== 0) {
+        const lastRect = header1LastElement.getBoundingClientRect();
+        const modelCenterX = window.innerWidth * 0.5;
+        const lastRightAtZero = lastRect.right - header1X;
+        const header1CrossT = Math.max(
+          0,
+          Math.min(1, (modelCenterX - lastRightAtZero) / header1EndX)
+        );
+        const fadeStartRaw = headerStart + headerDuration * header1CrossT;
+        const fadeStart = Math.min(
+          Math.max(fadeStartRaw, headerStart),
+          circularStart
+        );
+        const fadeEnd = circularStart + circularDuration * 0.2;
+        const fadeWindow = Math.max(0.0001, fadeEnd - fadeStart);
+        const fadeT = Math.max(
+          0,
+          Math.min(1, (progress - fadeStart) / fadeWindow)
+        );
+        const fadeEase = fadeT * fadeT * (3 - 2 * fadeT);
+        modelScaleFade = 1 - fadeEase;
+      }
+      gsap.set(".model-container", {
+        scale: modelScale * modelScaleFade,
+        autoAlpha: 1,
+      });
 
       // Header-2 slide
       const header2Start = circularStart + circularDuration + 0.02;
@@ -824,45 +911,37 @@ document.addEventListener("DOMContentLoaded", () => {
       const rotationWindow = Math.max(0.0001, rotationStopAt - rotationStartAt);
       const p = Math.max(0, Math.min(1, (progress - rotationStartAt) / rotationWindow));
 
-      // Mostly linear, with a longer ease-out near the end (no snap at stop).
-      const easePortion = 0.25; // last 25% of the rotation timeline eases out
-      const easeStart = 1 - easePortion;
-      let easedP = p;
-      if (p > easeStart) {
-        const t = (p - easeStart) / easePortion; // 0..1
-        // Smooth deceleration with matched slope at the transition:
-        // s(0)=0, s(1)=1, s'(0)=1, s'(1)=0
-        const s = -t * t * t + t * t + t;
-        easedP = easeStart + s * easePortion;
-      }
-
-      targetRotation = Math.PI * 3 * 4 * easedP;
+      targetRotation = Math.PI * 3 * 4 * p;
     },
-  });
+    });
+  }
 
   // ------------------------------------------------------------
   // Gallery pin
   // ------------------------------------------------------------
-  ScrollTrigger.create({
-    trigger: ".gallery-section",
-    start: "top top",
-    end: () => `+=${window.innerHeight * 1.5}`,
-    pin: true,
-    pinSpacing: true,
-    id: "gallery-pin",
-    onEnter: () => {
-      window.galleryPinned = true;
-    },
-    onLeave: () => {
-      window.galleryPinned = false;
-    },
-    onEnterBack: () => {
-      window.galleryPinned = true;
-    },
-    onLeaveBack: () => {
-      window.galleryPinned = false;
-    },
-  });
+  const gallerySection = document.querySelector(".gallery-section");
+  if (gallerySection) {
+    ScrollTrigger.create({
+      trigger: gallerySection,
+      start: "top top",
+      end: () => `+=${window.innerHeight * 1.5}`,
+      pin: true,
+      pinSpacing: true,
+      id: "gallery-pin",
+      onEnter: () => {
+        window.galleryPinned = true;
+      },
+      onLeave: () => {
+        window.galleryPinned = false;
+      },
+      onEnterBack: () => {
+        window.galleryPinned = true;
+      },
+      onLeaveBack: () => {
+        window.galleryPinned = false;
+      },
+    });
+  }
 
 
 });
