@@ -540,10 +540,10 @@ document.addEventListener("DOMContentLoaded", () => {
   renderer.toneMapping = THREE.NoToneMapping;
   renderer.toneMappingExposure = 1.0;
 
-  // FIX: your HTML uses `.model-container` (not `.modal-container`)
-  const modelContainer = document.querySelector(".model-container");
+  // NOTE: laptop model mounts into `.model-container--laptop`.
+  const modelContainer = document.querySelector(".model-container--laptop");
   if (!modelContainer) {
-    console.warn('Missing ".model-container" in HTML. Canvas not attached.');
+    console.warn('Missing ".model-container--laptop" in HTML. Canvas not attached.');
     return;
   }
   modelContainer.appendChild(renderer.domElement);
@@ -637,6 +637,141 @@ document.addEventListener("DOMContentLoaded", () => {
     (err) => console.error("GLB load failed ❌", err)
   );
 
+  // ------------------------------------------------------------
+  // 2b) Gameboy model setup
+  // ------------------------------------------------------------
+  let gameboyModel = null;
+  let gameboyModelSize = null;
+  let gameboyCurrentRotation = 0;
+  let gameboyTargetRotation = 0;
+  const gameboyRotationAxis = new THREE.Vector3(0, 1, 0);
+  const gameboyRotationDamp = 8;
+  const gameboyMaxRotation = Math.PI * 2;
+
+  const gameboyContainer = document.querySelector(
+    ".model-container--gameboy"
+  );
+  if (!gameboyContainer) {
+    console.warn(
+      'Missing ".model-container--gameboy" in HTML. Canvas not attached.'
+    );
+  }
+
+  const gameboyScene = gameboyContainer ? new THREE.Scene() : null;
+  const gameboyCamera = gameboyContainer
+    ? new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      )
+    : null;
+  const gameboyRenderer = gameboyContainer
+    ? new THREE.WebGLRenderer({ antialias: true, alpha: true })
+    : null;
+
+  if (gameboyRenderer && gameboyContainer) {
+    gameboyRenderer.setClearColor(0x000000, 0);
+    gameboyRenderer.setSize(window.innerWidth, window.innerHeight);
+    gameboyRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    gameboyRenderer.shadowMap.enabled = true;
+    gameboyRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    if ("outputColorSpace" in gameboyRenderer) {
+      gameboyRenderer.outputColorSpace = THREE.SRGBColorSpace;
+    }
+
+    gameboyRenderer.toneMapping = THREE.NoToneMapping;
+    gameboyRenderer.toneMappingExposure = 1.0;
+
+    gameboyContainer.appendChild(gameboyRenderer.domElement);
+    gsap.set(gameboyContainer, {
+      xPercent: -50,
+      yPercent: -50,
+      scale: 0,
+      autoAlpha: 0,
+      transformOrigin: "50% 50%",
+    });
+  }
+
+  if (gameboyScene) {
+    gameboyScene.add(new THREE.AmbientLight(0xffffff, 0.8));
+
+    const gameboyMainLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    gameboyMainLight.position.set(1, 2, 3);
+    gameboyMainLight.castShadow = true;
+    gameboyMainLight.shadow.bias = -0.001;
+    gameboyMainLight.shadow.mapSize.width = 1024;
+    gameboyMainLight.shadow.mapSize.height = 1024;
+    gameboyScene.add(gameboyMainLight);
+
+    const gameboyFillLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    gameboyFillLight.position.set(-2, 0, -2);
+    gameboyScene.add(gameboyFillLight);
+  }
+
+  function setupGameboyModel() {
+    if (!gameboyModel || !gameboyModelSize || !gameboyCamera) return;
+
+    const isMobile = window.innerWidth < 1000;
+
+    gameboyModel.rotation.set(0, 0, 0);
+    gameboyModel.rotation.y = isMobile ? 0 : THREE.MathUtils.degToRad(90);
+
+    const box = new THREE.Box3().setFromObject(gameboyModel);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    gameboyModel.position.sub(center);
+    gameboyModel.position.y -= size.y * 0.05;
+
+    // Keep the rotation state aligned after resets (e.g. resize).
+    gameboyCurrentRotation = 0;
+    if (gameboyTargetRotation !== 0) {
+      gameboyModel.rotateOnAxis(gameboyRotationAxis, gameboyTargetRotation);
+      gameboyCurrentRotation = gameboyTargetRotation;
+    }
+
+    const fitPadding = isMobile ? 1.6 : 1.3;
+    const rotatedBox = new THREE.Box3().setFromObject(gameboyModel);
+    const rotatedSize = rotatedBox.getSize(new THREE.Vector3());
+    const fov = THREE.MathUtils.degToRad(gameboyCamera.fov);
+    const distanceForHeight =
+      (rotatedSize.y * fitPadding) / (2 * Math.tan(fov / 2));
+    const distanceForWidth =
+      (rotatedSize.x * fitPadding) /
+      (2 * Math.tan(fov / 2) * gameboyCamera.aspect);
+    const cameraDistance =
+      Math.max(distanceForHeight, distanceForWidth) + rotatedSize.z * 0.5;
+
+    gameboyCamera.position.set(0, 0, cameraDistance);
+    gameboyCamera.lookAt(0, 0, 0);
+  }
+
+  const GAMEBOY_MODEL_URL = "/models/nintendo_gameboy_low-poly.glb";
+
+  if (gameboyScene) {
+    new GLTFLoader().load(
+      GAMEBOY_MODEL_URL,
+      (gltf) => {
+        gameboyModel = gltf.scene;
+        gameboyModel.traverse((node) => {
+          if (node.isMesh) {
+            node.castShadow = true;
+            node.receiveShadow = true;
+          }
+        });
+
+        const box = new THREE.Box3().setFromObject(gameboyModel);
+        gameboyModelSize = box.getSize(new THREE.Vector3());
+
+        gameboyScene.add(gameboyModel);
+        setupGameboyModel();
+      },
+      undefined,
+      (err) => console.error("Gameboy GLB load failed", err)
+    );
+  }
+
   // Render loop for the Three.js scene.
   function animate() {
     requestAnimationFrame(animate);
@@ -656,7 +791,23 @@ document.addEventListener("DOMContentLoaded", () => {
         currentRotation = nextRotation;
       }
     }
+    if (gameboyModel) {
+      const nextRotation = THREE.MathUtils.damp(
+        gameboyCurrentRotation,
+        gameboyTargetRotation,
+        gameboyRotationDamp,
+        delta
+      );
+      const rotationStep = nextRotation - gameboyCurrentRotation;
+      if (Math.abs(rotationStep) > 0.000001) {
+        gameboyModel.rotateOnAxis(gameboyRotationAxis, rotationStep);
+        gameboyCurrentRotation = nextRotation;
+      }
+    }
     renderer.render(scene, camera);
+    if (gameboyRenderer && gameboyScene && gameboyCamera) {
+      gameboyRenderer.render(gameboyScene, gameboyCamera);
+    }
   }
   animate();
 
@@ -672,6 +823,13 @@ document.addEventListener("DOMContentLoaded", () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       setupModel();
+      if (gameboyCamera && gameboyRenderer) {
+        gameboyCamera.aspect = window.innerWidth / window.innerHeight;
+        gameboyCamera.updateProjectionMatrix();
+        gameboyRenderer.setSize(window.innerWidth, window.innerHeight);
+        gameboyRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        setupGameboyModel();
+      }
 
       if (typeof lenis?.resize === "function") {
         lenis.resize();
@@ -825,7 +983,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fadeEase = fadeT * fadeT * (3 - 2 * fadeT);
         modelScaleFade = 1 - fadeEase;
       }
-      gsap.set(".model-container", {
+      gsap.set(".model-container--laptop", {
         scale: modelScale * modelScaleFade,
         autoAlpha: 1,
       });
@@ -901,6 +1059,29 @@ document.addEventListener("DOMContentLoaded", () => {
         const eased = t * t * (3 - 2 * t);
         const y = `${(1 - eased) * 125}%`;
         gsap.set(elements, { y });
+      });
+
+      // Gameboy model scales up as tooltips reveal.
+      const gameboyScaleStart = tooltipStart + (tooltipSelectors[0]?.trigger ?? 0);
+      const gameboyScaleEnd =
+        tooltipStart + lastTooltipTriggerOffset + tooltipRevealWindow;
+      const gameboyScaleWindow = Math.max(
+        0.0001,
+        gameboyScaleEnd - gameboyScaleStart
+      );
+      const gameboyScaleT = Math.max(
+        0,
+        Math.min(1, (progress - gameboyScaleStart) / gameboyScaleWindow)
+      );
+      const gameboyScaleEase =
+        gameboyScaleT * gameboyScaleT * (3 - 2 * gameboyScaleT);
+
+      const gameboyScale = gameboyScaleEase * 0.6;
+      gameboyTargetRotation = gameboyMaxRotation * gameboyScaleEase;
+
+      gsap.set(".model-container--gameboy", {
+        scale: gameboyScale,
+        autoAlpha: gameboyScaleEase,
       });
 
       // Model rotation

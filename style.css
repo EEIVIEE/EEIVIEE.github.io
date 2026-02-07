@@ -439,6 +439,7 @@ section{
 
 .projects{
     position: relative;
+    overflow: visible;
 }
 
 /* Class Styles */
@@ -535,6 +536,13 @@ section{
     transform-origin: 50% 50%;
     pointer-events: none;
     user-select: none;
+}
+
+.model-container--gameboy {
+    z-index: 9;
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+    left: 50%;
 }
 
 .header-1{
