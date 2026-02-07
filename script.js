@@ -656,9 +656,6 @@ document.addEventListener("DOMContentLoaded", () => {
       'Missing ".model-container--gameboy" in HTML. Canvas not attached.'
     );
   }
-  if (gameboyContainer && gameboyContainer.parentElement !== document.body) {
-    document.body.appendChild(gameboyContainer);
-  }
 
   const getGameboyViewportSize = () => {
     if (!gameboyContainer) {

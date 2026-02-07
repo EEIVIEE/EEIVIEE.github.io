@@ -539,6 +539,7 @@ section{
 }
 
 .model-container--gameboy {
+    position: absolute;
     z-index: 9;
     opacity: 0;
     transform: translate(0, 0) scale(0);
