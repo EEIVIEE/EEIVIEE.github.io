@@ -656,23 +656,37 @@ document.addEventListener("DOMContentLoaded", () => {
       'Missing ".model-container--gameboy" in HTML. Canvas not attached.'
     );
   }
+  if (gameboyContainer && gameboyContainer.parentElement !== document.body) {
+    document.body.appendChild(gameboyContainer);
+  }
+
+  const getGameboyViewportSize = () => {
+    if (!gameboyContainer) {
+      return { width: window.innerWidth, height: window.innerHeight };
+    }
+    const width = gameboyContainer.offsetWidth || window.innerWidth;
+    const height = gameboyContainer.offsetHeight || window.innerHeight;
+    return { width, height };
+  };
 
   const gameboyScene = gameboyContainer ? new THREE.Scene() : null;
   const gameboyCamera = gameboyContainer
-    ? new THREE.PerspectiveCamera(
-        60,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-      )
+    ? new THREE.PerspectiveCamera(60, 1, 0.1, 1000)
     : null;
   const gameboyRenderer = gameboyContainer
     ? new THREE.WebGLRenderer({ antialias: true, alpha: true })
     : null;
 
+  if (gameboyCamera) {
+    const { width, height } = getGameboyViewportSize();
+    gameboyCamera.aspect = width / height;
+    gameboyCamera.updateProjectionMatrix();
+  }
+
   if (gameboyRenderer && gameboyContainer) {
+    const { width, height } = getGameboyViewportSize();
     gameboyRenderer.setClearColor(0x000000, 0);
-    gameboyRenderer.setSize(window.innerWidth, window.innerHeight);
+    gameboyRenderer.setSize(width, height);
     gameboyRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     gameboyRenderer.shadowMap.enabled = true;
     gameboyRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -716,13 +730,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth < 1000;
 
     gameboyModel.rotation.set(0, 0, 0);
-    gameboyModel.rotation.y = isMobile ? 0 : THREE.MathUtils.degToRad(90);
+    gameboyModel.rotation.y = isMobile ? THREE.MathUtils.degToRad(90) : THREE.MathUtils.degToRad(90);
 
     const box = new THREE.Box3().setFromObject(gameboyModel);
     const center = box.getCenter(new THREE.Vector3());
     const size = box.getSize(new THREE.Vector3());
     gameboyModel.position.sub(center);
-    gameboyModel.position.y -= size.y * 0.05;
+    const gameboyXOffset = isMobile ? -0.14 : -0.1;
+    gameboyModel.position.x += size.x * gameboyXOffset;
+    const gameboyYOffset = isMobile ? -0.12 : -0.05;
+    gameboyModel.position.y += size.y * gameboyYOffset;
 
     // Keep the rotation state aligned after resets (e.g. resize).
     gameboyCurrentRotation = 0;
@@ -731,14 +748,18 @@ document.addEventListener("DOMContentLoaded", () => {
       gameboyCurrentRotation = gameboyTargetRotation;
     }
 
-    const fitPadding = isMobile ? 1.6 : 1.3;
+    const fitPadding = isMobile ? 1.85 : 1.3;
     const rotatedBox = new THREE.Box3().setFromObject(gameboyModel);
     const rotatedSize = rotatedBox.getSize(new THREE.Vector3());
+    // Account for max width during Y-rotation (diagonal of x/z).
+    const maxXZ = Math.sqrt(
+      rotatedSize.x * rotatedSize.x + rotatedSize.z * rotatedSize.z
+    );
     const fov = THREE.MathUtils.degToRad(gameboyCamera.fov);
     const distanceForHeight =
       (rotatedSize.y * fitPadding) / (2 * Math.tan(fov / 2));
     const distanceForWidth =
-      (rotatedSize.x * fitPadding) /
+      (maxXZ * fitPadding) /
       (2 * Math.tan(fov / 2) * gameboyCamera.aspect);
     const cameraDistance =
       Math.max(distanceForHeight, distanceForWidth) + rotatedSize.z * 0.5;
@@ -824,9 +845,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       setupModel();
       if (gameboyCamera && gameboyRenderer) {
-        gameboyCamera.aspect = window.innerWidth / window.innerHeight;
+        const { width, height } = getGameboyViewportSize();
+        gameboyCamera.aspect = width / height;
         gameboyCamera.updateProjectionMatrix();
-        gameboyRenderer.setSize(window.innerWidth, window.innerHeight);
+        gameboyRenderer.setSize(width, height);
         gameboyRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         setupGameboyModel();
       }

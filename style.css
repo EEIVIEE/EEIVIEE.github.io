@@ -542,7 +542,6 @@ section{
     z-index: 9;
     opacity: 0;
     transform: translate(0, 0) scale(0);
-    left: 50%;
 }
 
 .header-1{
@@ -1204,6 +1203,11 @@ section{
     .tooltip .title{
         width: 100%;
     } 
+
+    .model-container--gameboy{
+        width: 120vw;
+        height: calc(var(--vh, 1vh) * 120);
+    }
 
 }
 .header-1 .horizontal-grid-spacer:first-child{
