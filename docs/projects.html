@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,25 +10,25 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
 
-  <script type="module" crossorigin src="/assets/projects-rpcoqMrE.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/script-DFvkK6aC.js">
-  <link rel="stylesheet" crossorigin href="/assets/script-lttFGRrr.css">
-  <link rel="stylesheet" crossorigin href="/assets/projects-C7n1GIU_.css">
+  <script type="module" crossorigin src="./assets/projects-oU6xbEqi.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/script-DIRN3xq-.js">
+  <link rel="stylesheet" crossorigin href="./assets/script-IAJxd9MY.css">
+  <link rel="stylesheet" crossorigin href="./assets/projects--EQ2jSlH.css">
 </head>
 <body class="projects-page" data-page="projects">
   <div class="nav">
     <div class="nav-inner">
       <div class="nav-left">
         <div class="nav-logo">
-          <img class="nav-logo-img" src="/assets/LOUIS-B97NJX-D.svg" alt="Logo" />
+          <img class="nav-logo-img" src="./assets/LOUIS-B97NJX-D.svg" alt="Logo" />
         </div>
       </div>
       <div class="nav-center">
-        <img class="nav-logo-img" src="/assets/LOGO-BnkPVcVd.svg" alt="Logo" />
+        <img class="nav-logo-img" src="./assets/LOGO-BnkPVcVd.svg" alt="Logo" />
       </div>
       <div class="nav-right">
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-          <img class="inactive" src="/assets/LOGO-BnkPVcVd.svg" alt="Logo" />
+          <img class="inactive" src="./assets/LOGO-BnkPVcVd.svg" alt="Logo" />
           <i class="close" aria-hidden="true">&times;</i>
         </button>
       </div>
@@ -61,10 +62,10 @@
   </div>
   <main class="projects-page">
     <header class="projects-hero">
-      <p class="projects-eyebrow">Selected Work</p>
+      <p class="projects-eyebrow">Selected Works</p>
       <h1>Projects</h1>
       <p class="projects-lede">
-        A vertical scroll showcase where each image slides in from alternating sides as you move down the page.
+        My collection of projects exploring gameplay systems, engine fundamentals, and scalable architecture through hands-on implementation.
       </p>
     </header>
 
@@ -81,140 +82,113 @@
     <section class="projects-list" data-position="1" id="tank-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
-          <img src="/assets/TANK%20GAME_2-DDKxJmby.JPG" alt="Tank Game screenshot" />
+          <img src="./assets/TANK%20GAME_2-DDKxJmby.JPG" alt="Tank Game screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">2025, Game Design & Development</p>
           <h1>Tank Game</h1>
-          <p>The TANK project was developed as a structured re-entry into Unity game development, focusing on an 
-            end-to-end gameplay workflow rather than a single isolated mechanic or minimal prototype. Instead of 
-            building a simple arcade-style game such as Snake or Pong, this project was intentionally chosen to 
-            explore multiple interdependent gameplay systems that reflect how real Unity projects are organised. 
-            The concept was also personally meaningful, as my experience operating an armoured vehicle during National 
-            Service provided a familiar and engaging context to explore movement, control, and combat mechanics in a 
-            game environment.</p>
+          <p>The TANK project marked my re-entry into Unity development, focusing on 
+            interconnected gameplay systems in a full workflow, inspired by my National 
+            Service experience with armoured vehicles.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="2">
         <div class="project-media" data-from="right">
-          <img src="/assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
+          <img src="./assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">Tank Mechanics</p>
           <h2>Mechanics Overview</h2>
-          <p>The mechnaics were implemented through a set of focused C# scripts 
-            that helped me reinforce core gameplay programming patterns in Unity. 
-            I structured the logic into separate components for movement, shooting, 
-            and health to keep responsibilities clear and reusable.</p>
-          <P>Core tank mechanics were implemented using physics-safe movement with 
-            Rigidbody APIs and dynamically mapped player input to support scalability. 
-            Shooting uses a charge-based system driven by input events and time-based 
-            calculations, with explicit state control to prevent unintended multiple firings. 
-            Health and damage logic are handled through a single entry point, with lifecycle 
-            methods and object activation used to manage clean resets between rounds.</P>
+          <p>The mechanics were implemented through focused C# scripts, reinforcing core 
+            Unity gameplay patterns. Logic was split into movement, shooting, and health 
+            components to maintain clear, reusable responsibilities.</p>
+          <P>Tank mechanics use physics-safe Rigidbody movement, charge-based shooting with 
+            strict state control, and centralized health handling for clean round resets.</P>
         </div>
       </div>
 
       <div class="project-row" data-position="3">
         <div class="project-media" data-from="left">
-          <img src="/assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
+          <img src="./assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">TankMovement.cs</p>
           <h2>TankMovement</h2>
-          <p>TankMovement.cs handles player input and translates it into physics-safe movement using 
-            Unity’s Rigidbody APIs. Forward movement and turning are applied within the physics update 
-            loop to maintain consistent behaviour across different frame rates. Input axes are constructed 
-            dynamically based on player number, allowing the same script to scale across multiple tanks without 
-            duplication. The script also manages engine audio states, switching between idling and driving based 
-            on movement input to provide responsive feedback tied directly to gameplay state.</p>
+          <p>TankMovement.cs handles physics-safe Rigidbody movement in the physics loop for 
+            consistent behaviour, with dynamically generated input axes to support multiple players. 
+            It also switches engine audio between idle and driving states based on movement input.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="4">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">TankShooting.cs</p>
           <h2>TankShooting</h2>
-          <p>TankShooting.cs implements a charge-based firing mechanic driven by input events rather than continuous 
-            polling. While the fire button is held, launch force increases over time using frame-rate–independent 
-            calculations, with the current charge reflected through UI feedback. Releasing the button or reaching 
-            maximum charge triggers projectile instantiation, where an initial velocity is applied before handing 
-            control over to the physics system. Internal state flags are used to ensure each input cycle results in 
-            only a single shot.</p>
+          <p>TankShooting.cs uses an event-driven, charge-based firing system with time-based 
+            force accumulation and UI feedback. Projectiles are spawned on release or max 
+            charge, with state flags preventing multiple shots per input cycle.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="5">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">TankHealth.cs</p>
           <h2>TankHealth</h2>
-          <p>TankHealth.cs encapsulates health and damage logic behind a single interface, making it easy for combat 
-            systems to apply damage consistently. Health state is reset through lifecycle methods when the tank is 
-            re-enabled, supporting round-based gameplay without recreating objects. When health reaches zero, visual 
-            and audio feedback are triggered before the tank is deactivated, allowing higher-level managers to control 
-            respawning and game flow cleanly.</p>
+          <p>TankHealth.cs centralises health and damage handling, resets state on re-enable 
+            for round-based gameplay, and triggers feedback before deactivation to allow clean 
+            respawn and flow control.</p>
         </div>
       </div>
       <div class="project-row reverse" data-position="6">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">TankManager.cs, GameManager.cs</p>
           <h2>Managers</h2>
-          <p>To support structured, round-based gameplay, I implemented a set of manager scripts to coordinate match 
-            flow and player lifecycle. These scripts centralise responsibilities such as spawning and resetting tanks,
-             controlling when players can move or shoot, and progressing the game through clear round states. By 
-             separating overall game flow from individual tank behaviour, the manager layer ensures the project remains
-             organised, predictable, and easy to extend as complexity increases.</p>
+          <p>To support round-based gameplay, Manager scripts coordinate round-based match flow, handling spawning, player 
+            control gating, and state progression, while keeping game flow separate from 
+            individual tank logic.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="7">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">GameManager.cs</p>
           <h2>GameManager</h2>
-          <p>The game manager layer is what turns TANKS from a “sandbox with controls” into an actual round-based game
-             loop. GameManager.cs acts as the orchestrator: it handles initial setup (spawning tanks, wiring camera 
-             targets, and updating UI messaging), then runs the match flow through a structured loop of RoundStarting 
-             → RoundPlaying → RoundEnding—typically implemented as a coroutine so timing and state transitions are 
-             explicit rather than scattered across update methods. This keeps the gameplay predictable: each round 
-             begins with a reset, transitions into active play with controls enabled, and ends cleanly when win 
-             conditions are met and the next state is prepared.</p>
+          <p>GameManager.cs orchestrates TANKS’ round-based loop, handling setup, UI, and 
+            camera wiring, then advancing gameplay through explicit round states via a coroutine to 
+            ensure clean resets and predictable state transitions.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="8">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">TankManager.cs</p>
           <h2>TankManager</h2>
-          <p>TankManager.cs sits one level below as a per-tank controller that bundles everything needed to manage an 
-            individual player tank as a unit. Instead of the GameManager reaching into multiple scripts 
-            (movement/shooting/health) directly, the TankManager provides a clean interface to spawn/reset the tank, 
-            apply player-specific settings (like colour/spawn point), and enable/disable control in a consistent way. 
-            That separation of responsibilities is the key learning here: GameManager focuses on match state and 
-            progression, while TankManager focuses on player entity lifecycle and control gating—which makes the 
-            overall system easier to extend (more players, different round rules, new win conditions) without 
-            rewriting core logic.</p>
+          <p>TankManager.cs manages each player tank as a single unit, exposing a clean 
+            interface for spawning, resetting, player-specific setup, and control gating. 
+            This keeps match flow separate from entity lifecycle, improving scalability and 
+            extensibility.</p>
         </div>
       </div>
       
       <div class="project-row" data-position="9">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">From mechanics to systems.</p>
@@ -232,142 +206,115 @@
     <section class="projects-list" data-position="2" id="snake-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
-          <img src="/assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Tank Game screenshot" />
+          <img src="./assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Tank Game screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">2023, Game Design & Development</p>
           <h1>SNAKE REMAKE</h1>
-          <p>This Snake game was one of my first Unity projects, built as an entry point into engine-based development 
-            while preparing for a VR-focused course. The goal of the project was not complexity, but familiarity—using 
-            a simple and well-understood game to learn how Unity scenes, scripts, and game objects interact at runtime.</p>
-          <p>Through this project, I learned how to structure a basic game loop using C#, handle real-time player input, 
-            manage object movement on a grid, and implement simple collision-based logic for growth and game-over conditions. 
-            Working on Snake helped me become comfortable with Unity’s scripting workflow, scene setup, and update cycles, 
-            and served as a foundation before moving on to more complex, system-driven projects.</p>
+          <p>This Snake game served as an early entry point into Unity, focused on learning 
+            core engine concepts rather than complexity. It introduced C# game loops, 
+            real-time input, grid-based movement, and collision logic, forming a foundation 
+            for more advanced Unity projects.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="2">
         <div class="project-media" data-from="right">
-          <img src="/assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
+          <img src="./assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">PlayerMovement.cs</p>
           <h2>Snake Movement</h2>
-          <p>The core of the Snake game is built around a movement system that advances the snake in discrete steps 
-            while enforcing directional constraints to preserve classic Snake behaviour. Player input is translated 
-            into directional state rather than immediate position changes, preventing invalid moves such as reversing 
-            directly into the snake’s own body. Movement is updated on a fixed interval, allowing the game to maintain
-             consistent pacing independent of frame rate.</p>
+          <p>Snake movement is step-based with enforced directional constraints, 
+            using input-driven state changes to prevent invalid reversals and a fixed 
+            update interval for consistent pacing.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="3">
         <div class="project-media" data-from="left">
-          <img src="/assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
+          <img src="./assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">PlayerMovement.cs</p>
           <h2>Growth Logic</h2>
-          <p>Growth is handled by instantiating body segment prefabs when food is collected and appending them to an 
-            ordered list that represents the snake’s body. Each segment follows the previous one’s position, creating 
-            the illusion of a continuous chain while remaining simple to reason about in code. This approach helped me 
-            understand how to manage object lifecycles, maintain ordered state, and synchronise multiple game objects 
-            through a single source of truth. Implementing this system gave me early experience with structuring 
-            real-time gameplay logic, handling player input safely, and coordinating multiple entities through code rather 
-            than manual scene setup.</p>
+          <p>Snake growth is implemented by instantiating body segments and tracking them 
+            in an ordered list, with each segment following the previous one. This reinforced 
+            object lifecycle management, ordered state, and multi-object coordination.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="4">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">Decoupling interaction effects from movement</p>
           <h2>Collectibles</h2>
-          <p>The collectibles system was designed to handle interactions between the snake and in-game items such as 
-            food and power-ups, serving as an introduction to collision-driven gameplay logic in Unity. When the snake 
-            collides with a collectible, the event triggers state changes such as growth, score updates, or temporary 
-            gameplay effects. This helped me understand how Unity’s collision callbacks can act as entry points for 
-            modifying core gameplay state rather than embedding that logic directly into movement code.</p>
+          <p>A collectibles system uses collision callbacks to trigger growth, scoring, 
+            and temporary effects, reinforcing clean separation between movement and 
+            gameplay state changes.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="5">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">CollectiblesController.cs</p>
           <h2>CollectiblesController</h2>
-          <p>The CollectiblesController script acts as a shared base for all collectible interactions, handling 
-            detection and common behaviour when the snake collides with an item. By centralising collision handling 
-            and interaction flow here, the script avoids duplicating logic across different collectible types. This 
-            helped me understand how to use a single control point for interactions while allowing specific effects 
-            to be defined elsewhere, keeping the overall system easier to extend.</p>
+          <p>CollectiblesController centralises collision handling for all collectibles, 
+            avoiding duplicated logic while allowing item-specific effects to remain modular.</p>
         </div>
       </div>
       <div class="project-row reverse" data-position="6">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">FoodController.cs</p>
           <h2>FoodController</h2>
-          <p>FoodController defines the behaviour for standard food items and focuses on triggering snake growth and 
-            score updates when collected. The script responds to collision events and communicates the effect back to 
-            the player controller, rather than directly modifying movement logic. This separation reinforced the idea 
-            that collectibles should describe what they do, while the player system decides how to apply those changes.</p>
+          <p>FoodController handles food collection, triggering growth and scoring while delegating 
+            state changes to the player controller to keep movement logic decoupled.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="7">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">PowerUpController.cs</p>
           <h2>PowerUpController</h2>
-          <p>PowerUpController extends the collectible concept by applying temporary gameplay effects rather than 
-            permanent state changes. This introduced me to managing short-lived game states and understanding how 
-            time-based effects can modify player behaviour without permanently altering core mechanics. Implementing 
-            power-ups helped me reason about how transient effects fit into an existing game loop without destabilising 
-            it.</p>
+          <p>PowerUpController applies temporary, time-based effects, introducing transient game states 
+            that modify player behaviour without changing core mechanics.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="8">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">State-driven flow control in Unity.</p>
           <h2>Game Flow & Level Control</h2>
-          <p>Game flow is handled through controller scripts that manage game start, reset, and game-over states, 
-            ensuring gameplay systems respond consistently to the current state. Implementing this made it clear how 
-            centralised flow control simplifies logic even in small projects, while also revealing the need for clearer 
-            responsibility boundaries as complexity increases.</p>
+          <p>Controller scripts manage start, reset, and game-over states, keeping gameplay systems in sync 
+            and highlighting the value of centralised flow control.</p>
         </div>
       </div>
       
       <div class="project-row" data-position="9">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">From mechanics to systems.</p>
           <h2>Refelctions</h2>
-          <p>This project played an important role in helping me build confidence working inside Unity and 
-            understanding how gameplay logic comes together in practice. As one of my earlier projects, many decisions 
-            were made for simplicity rather than long-term structure, which exposed issues such as overlapping 
-            responsibilities between scripts and tightly coupled logic as features were added. Encountering these 
-            limitations firsthand made it clear why clearer separation of concerns and centralised state management 
-            become necessary as projects grow.</p>
-            <p>Debugging movement edge cases, collision timing, and reset behaviour pushed me to think more carefully 
-              about execution order, shared state, and predictable game flow. These challenges exposed gaps in my 
-              approach and influenced how I structured later projects, with a stronger focus on system boundaries, 
-              clean state transitions, and scalability.</p>
+          <p>As an early Unity project, this built confidence but also exposed issues with tight coupling and 
+            overlapping responsibilities, highlighting the need for clearer separation of concerns as complexity increases.</p>
+          <p>Debugging movement, collisions, and resets highlighted the importance of execution order and shared state, 
+            shaping a stronger focus on system boundaries and scalable game flow in later projects.</p>
         </div>
       </div>
     </section>
@@ -375,82 +322,67 @@
     <section class="projects-list" data-position="3" id="fighter-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
-          <img src="/assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Tank Game screenshot" />
+          <img src="./assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Tank Game screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">2023, Game Design & Development</p>
           <h1>Street Fighter </h1>
-          <p>This project was created to explore game development outside of Unity by building a complete 2D fighting 
-            game using Pygame. After working on an early Unity project, I wanted to better understand what game engines 
-            abstract away by implementing core systems—such as the game loop, input handling, and animation control—more 
-            directly in code. Choosing a Street Fighter–style game allowed me to focus on real-time player input, 
-            sprite-based animation, and state-driven behaviour within a lightweight framework.</p>
+          <p>A 2D fighting game built in Pygame to explore core systems—game loop, input, and animation—outside of Unity, 
+            using a Street Fighter–style format to focus on real-time input and state-driven behaviour.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="2">
         <div class="project-media" data-from="right">
-          <img src="/assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
+          <img src="./assets/SNAKE%20GAME_1-D6g2JLRa.jpg" alt="Snake Remake screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">Animation System</p>
           <h2>Sprite Animation System</h2>
-          <p>Character animation in the game is driven by a sprite-based animation system built on sequential frame 
-            updates rather than engine-provided animation tools. Each character state—such as idle, movement, attack, 
-            or hit—is represented by a set of sprite frames that are cycled through over time to create smooth motion. 
-            Animation timing is controlled explicitly in code, allowing frame updates to remain consistent regardless 
-            of frame rate.</p>
-          <P>Implementing this system helped me understand how animation state machines work at a fundamental level, 
-            including how to transition cleanly between states and avoid visual conflicts. This experience deepened 
-            my appreciation for animation control as a core gameplay system rather than a purely visual layer.</P>
+          <p>Character animation is implemented using a sprite-based system driven by sequential frame updates rather than 
+            engine-provided tools. Each character state (idle, movement, attack, hit) maps to a set of sprite frames cycled 
+            over time, with animation timing controlled explicitly in code to remain frame-rate independent.</p>
+          <P>Building the animation system highlighted clean state transitions and reinforced animation as a core gameplay system.</P>
         </div>
       </div>
 
       <div class="project-row" data-position="3">
         <div class="project-media" data-from="left">
-          <img src="/assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
+          <img src="./assets/FIGHTER%20GAME_1-BhKlLstq.jpg" alt="Street Fighter clone screenshot" />
         </div>
         <div class="project-content">
           <p class="project-meta">Inputs & Combat</p>
           <h2>Player Input & Combat Logic</h2>
-          <p>Player input is handled directly through Pygame’s event system, translating keyboard input into character 
-            movement and combat actions in real time. Rather than relying on engine-level input abstractions, this 
-            approach required explicit handling of key states, timing, and action triggers. Attacks are initiated based 
-            on input conditions and processed through simple combat logic that determines when a character can perform 
-            actions and how those actions interact with opponents.</p>
+          <p>Player input is handled directly through Pygame’s event system, translating keyboard events into real-time movement and combat actions. This required 
+            explicit management of key states, timing, and action triggers rather than relying on engine abstractions. Attacks are initiated based on input 
+            conditions and processed through simple combat rules that determine action availability and interactions with opponents.</p>
         </div>
       </div>
 
       <div class="project-row reverse" data-position="4">
         <div class="project-media" data-from="right">
-          <img src="/assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
+          <img src="./assets/SUISEI_1-Dr_D6yGU.jpg" alt="City Skylines artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">Game Loop</p>
           <h2>State Management</h2>
-          <p>The game is structured around a manual game loop where input handling, state updates, and rendering are 
-            explicitly controlled each frame. Player behaviour is governed by clearly defined states—such as idle, 
-            moving, attacking, and hit—which determine both gameplay logic and animation output. This state-driven 
-            approach prevents conflicting actions from occurring simultaneously and ensures consistent behaviour during 
-            fast-paced combat.</p>
+          <p>The game uses a manually implemented loop with explicit control over input handling, state updates, and rendering each frame. Player behaviour 
+            is governed by clear states (idle, moving, attacking, hit) that drive both gameplay logic and animation, preventing conflicting actions and ensuring 
+            consistent behaviour during fast-paced combat.</p>
         </div>
       </div>
 
       <div class="project-row" data-position="5">
         <div class="project-media" data-from="left">
-          <img src="/assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
+          <img src="./assets/TM%20OPERA_1-D0m03b0x.jpg" alt="Opera inspired artwork" />
         </div>
         <div class="project-content">
           <p class="project-meta">Lessons Learnt</p>
           <h2>Reflections</h2>
-          <p>Building this project in Pygame exposed many assumptions I had previously relied on when using 
-            higher-level engines. Early on, I underestimated the complexity of managing player states and animation 
-            timing, which led to issues such as actions overlapping or animations desynchronising from gameplay logic. 
-            Addressing these problems forced me to be more explicit about state transitions and execution order within 
-            the game loop.</p>
-            <p>I initially coupled input handling directly with combat execution, which made action timing and state 
-              changes difficult to modify without introducing regressions. Refactoring this logic clarified the need 
-              for explicit state separation and cleaner control flow when designing real-time gameplay systems.</p>
+          <p>Building this project in Pygame exposed assumptions I previously relied on when using other game engines. Underestimating the complexity of player state 
+            management and animation timing led to issues like overlapping actions and desynchronised animations. Resolving these problems required more explicit state 
+            transitions and tighter control over execution order within the game loop.</p>
+            <p>Tightly coupling input and combat logic caused timing issues, reinforcing the need for clear state separation and clean control flow.</p>
         </div>
       </div>
     </section>
