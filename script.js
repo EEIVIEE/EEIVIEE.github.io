@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const galleryPin = ScrollTrigger.getById("gallery-pin");
       const targetScroll = galleryPin
-        ? galleryPin.start
+        ? galleryPin.start + 1
         : gallerySection.getBoundingClientRect().top + window.scrollY;
       const scrollDuration = 1.2;
 
