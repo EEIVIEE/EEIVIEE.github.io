@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const circularStart = headerStart + headerDuration + 0.005;
       const circularDuration = 0.1;
       const header2Start = circularStart;
-      const header2Offset = 0.02;
+      const header2Offset = 0.18;
       const targetScroll =
         pinTrigger.start +
         (pinTrigger.end - pinTrigger.start) * (header2Start + header2Offset);

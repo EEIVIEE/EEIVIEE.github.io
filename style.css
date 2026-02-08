@@ -300,6 +300,10 @@ section{
     border-radius: 1vmax;
     position: absolute;
     transition: transform 800ms ease;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .tile:hover {
@@ -572,7 +576,7 @@ section{
 
 
 .header-2{
-    --header-2-shift: 80vw;
+    --header-2-shift: 100vw;
     display: flex;
     position: fixed;
     top:0;
@@ -665,6 +669,20 @@ section{
     --grid-height: calc(var(--vh, 1vh) * 30);
 }
 
+.horizontal-grid-row[data-position="4"]{
+    --grid-width:calc(var(--vh, 1vh) * 45);
+}
+
+.horizontal-grid-row[data-position="4"] > .grid-image img{
+    transform: scale(1.08);
+}
+
+.horizontal-grid-row-2[data-position="5"]{
+    left: calc(var(--vh, 1vh) * 20);
+    --grid-width:calc(var(--vh, 1vh) * 30);
+    --grid-height: calc(var(--vh, 1vh) * 40);
+}
+
 
 .horizontal-grid-row-2[data-position="1"]{
     left: calc(var(--vh, 1vh) * 10);
@@ -703,7 +721,8 @@ section{
 
 
 .horizontal-grid-row[data-position="6"]{
-    --grid-width: calc(var(--vh, 1vh) * 24);;
+    left: calc(var(--vh, 1vh) * 15);
+    --grid-width: calc(var(--vh, 1vh) * 50);;
     --grid-height: calc(var(--vh, 1vh) * 30);
 }
 
@@ -717,9 +736,37 @@ section{
     height: calc(var(--vh, 1vh) * 30);
 }
 
+.project-row[data-position="5"] > .project-media img{
+    object-position: 0% 100%;
+}
+
+.horizontal-grid-row-2[data-position="9"] h2{
+    font-size: 1.8rem;
+}
 
 
-.horizontal-grid-row[data-position="6"] > .grid-image img{
+.horizontal-grid-row[data-position="8"]{
+    top: calc(var(--vh, 1vh) * 5);
+    left: calc(var(--vh, 1vh) * -30);
+    --grid-width: calc(var(--vh, 1vh) * 40);;
+    --grid-height: calc(var(--vh, 1vh) * 30);
+}
+
+.horizontal-grid-row-2[data-position="8"]{
+    left: calc(var(--vh, 1vh) * 30);
+    --grid-width: calc(var(--vh, 1vh) * 35);;
+    --grid-height: calc(var(--vh, 1vh) * 45);
+}
+
+.horizontal-grid-row[data-position="9"]{
+    left: calc(var(--vh, 1vh) * 20);
+    --grid-width: calc(var(--vh, 1vh) * 30);;
+    --grid-height: calc(var(--vh, 1vh) * 40);
+}
+
+
+
+.horizontal-grid-row[data-position=""] > .grid-image img{
     object-position: 34%;
     transform: scale(1.1);
 }
@@ -839,7 +886,7 @@ section{
     top: 50%;
     left: calc(var(--header-2-BGshift));
     transform: translateY(-50%);
-    width: calc(250vw - var(--header-spacer-width) - var(--header-spacer-pad));
+    width: calc(250vw);
     font-size: 15vw;
     color: #C4D9A5;
 }
@@ -1006,6 +1053,42 @@ section{
     .imageContainer img{
         object-position: 50% 30%;
     }
+
+    .horizontal-grid-row[data-position="6"]{
+        left: 0;
+    }
+
+    .horizontal-grid-row[data-position="8"]{
+        top: 0;
+        left: calc(var(--vh, 1vh) * -10);
+    }
+
+    .horizontal-grid-row-2[data-position="8"]{
+        left: calc(var(--vh, 1vh) * 15);
+        --grid-width: calc(var(--vh, 1vh) * 30);
+        --grid-height: calc(var(--vh, 1vh) * 40);
+    }
+
+    
+
+    .horizontal-grid-row[data-position="10"] h2,
+    .horizontal-grid-row-2[data-position="10"] h2{
+        width: 100%;
+        font-size: 1.5rem;
+    }
+}
+
+.horizontal-grid-row[data-position="10"]{
+    margin-bottom: var(--header-pad-left);
+}
+
+.horizontal-grid-row-2[data-position="10"]{
+    margin-top: var(--header-pad-left);
+}
+
+.horizontal-grid-row[data-position="10"] h2,
+.horizontal-grid-row-2[data-position="10"] h2{
+    font-size: 1.6rem;
 }
 
 .rectangular-mask::before{
@@ -1153,7 +1236,6 @@ section{
 
     .header-2 > .background-h1{
         left: 0;
-        width: 100%;
         font-size: 35vw;
     }
 
