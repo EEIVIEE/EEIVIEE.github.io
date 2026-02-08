@@ -1074,7 +1074,6 @@ section{
     .horizontal-grid-row[data-position="10"] h2,
     .horizontal-grid-row-2[data-position="10"] h2{
         width: 100%;
-        font-size: 1.5rem;
     }
 }
 
@@ -1088,7 +1087,7 @@ section{
 
 .horizontal-grid-row[data-position="10"] h2,
 .horizontal-grid-row-2[data-position="10"] h2{
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 .rectangular-mask::before{
