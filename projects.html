@@ -4,11 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home</title>
+  <title>Projects</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Jura:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="projects-style.css" />
@@ -22,42 +24,44 @@
         </div>
       </div>
       <div class="nav-center">
-        <img loading="eager" decoding="async" class="nav-logo-img" src="images/LOGO.svg" alt="Logo" />
+        <img loading="eager" decoding="async" class="nav-logo-img nav-signature nav-signature--dark" src="images/Icons/signature.png" alt="Logo" />
+        <img loading="eager" decoding="async" class="nav-logo-img nav-signature nav-signature--white" src="images/Icons/signature [White].png" alt="" aria-hidden="true" />
       </div>
       <div class="nav-right">
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-          <img loading="eager" decoding="async" class="inactive" src="images/LOGO.svg" alt="Logo" />
+          <img loading="eager" decoding="async" class="inactive ev-static" src="images/Icons/EV_.svg" alt="Menu" />
+          <span class="ev-anim" aria-hidden="true"></span>
           <i class="close" aria-hidden="true">&times;</i>
         </button>
       </div>
     </div>
   </div>
-  <div class="nav-menu" id="nav-menu" aria-hidden="true">
-    <div class="nav-menu-inner">
-      <a class="nav-link" href="index.html#">HOME</a>
-      <div class="nav-item">
-        <div class="nav-link-group">
-          <a class="nav-link" href="index.html#projects-anchor">PROJECTS</a>
-          <button
-            class="nav-subtoggle"
-            type="button"
-            aria-label="Toggle projects menu"
-            aria-expanded="false"
-            aria-controls="projects-submenu"
-          >
-            <span class="nav-subtoggle-icon">+</span>
-          </button>
+    <div class="nav-menu" id="nav-menu" aria-hidden="true">
+      <div class="nav-menu-inner">
+        <a class="nav-link" href="index.html#">HOME</a>
+        <div class="nav-item">
+          <div class="nav-link-group">
+            <a class="nav-link" href="projects.html">PROJECTS</a>
+            <button
+              class="nav-subtoggle"
+              type="button"
+              aria-label="Toggle projects menu"
+              aria-expanded="false"
+              aria-controls="projects-submenu"
+            >
+              <span class="nav-subtoggle-icon">+</span>
+            </button>
+          </div>
+          <div class="nav-submenu" id="projects-submenu" aria-hidden="true">
+            <a class="nav-sublink" href="projects.html#tank-project">TANK GAME</a>
+            <a class="nav-sublink" href="projects.html#snake-project">SNAKE REMAKE</a>
+            <a class="nav-sublink" href="projects.html#fighter-project">FIGHTER GAME</a>
+          </div>
         </div>
-        <div class="nav-submenu" id="projects-submenu" aria-hidden="true">
-          <a class="nav-sublink" href="projects.html#tank-project">TANK GAME</a>
-          <a class="nav-sublink" href="projects.html#snake-project">SNAKE REMAKE</a>
-          <a class="nav-sublink" href="projects.html#fighter-project">FIGHTER GAME</a>
-        </div>
+        <a class="nav-link" href="index.html#about-anchor">ABOUT ME</a>
+        <a class="nav-link" href="index.html#gallery-section">GALLERY</a>
       </div>
-      <a class="nav-link" href="index.html#about-anchor">ABOUT ME</a>
-      <a class="nav-link" href="index.html#gallery-section">GALLERY</a>
     </div>
-  </div>
   <main class="projects-page">
     <header class="projects-hero">
       <p class="projects-eyebrow">Selected Works</p>
@@ -77,7 +81,27 @@
       </div>
     </section>
 
-    <section class="projects-list" data-position="1" id="tank-project">
+    <section class="category-section category-section--games" id="games">
+      <div class="category-header">
+        <p class="category-index">01 — Interactive</p>
+        <h2>Game Development</h2>
+        <p class="projects-lede">Three Unity &amp; Pygame builds. Tap a project to expand its full breakdown.</p>
+      </div>
+
+    <div class="game-projects">
+    <article class="game-project">
+      <button class="game-project-toggle" type="button" aria-expanded="false" aria-controls="tank-detail">
+        <span class="game-project-thumb"><img loading="lazy" decoding="async" src="images/TANK GAME_2.JPG" alt="" /></span>
+        <span class="game-project-text">
+          <span class="project-meta">2025, Game Design &amp; Development</span>
+          <span class="game-project-title">Tank Game</span>
+          <span class="game-project-tag">Unity · C# · Systems Design</span>
+        </span>
+        <span class="game-project-icon" aria-hidden="true"></span>
+      </button>
+      <div class="game-project-detail" id="tank-detail">
+        <div class="game-project-detail-inner">
+        <div class="game-detail-rows" data-position="1" id="tank-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
           <img loading="lazy" decoding="async" src="images/TANK GAME_2.JPG" alt="Tank Game screenshot" />
@@ -211,9 +235,24 @@
             strengthened my ability to reason about real-time game architecture rather than just individual mechanics.</p>
         </div>
       </div>
-    </section>
+        </div>
+        </div>
+      </div>
+    </article>
 
-    <section class="projects-list" data-position="2" id="snake-project">
+    <article class="game-project">
+      <button class="game-project-toggle" type="button" aria-expanded="false" aria-controls="snake-detail">
+        <span class="game-project-thumb"><img loading="lazy" decoding="async" src="images/SNAKE GAME_1.jpg" alt="" /></span>
+        <span class="game-project-text">
+          <span class="project-meta">2023, Game Design &amp; Development</span>
+          <span class="game-project-title">Snake Remake</span>
+          <span class="game-project-tag">Unity · C# · Fundamentals</span>
+        </span>
+        <span class="game-project-icon" aria-hidden="true"></span>
+      </button>
+      <div class="game-project-detail" id="snake-detail">
+        <div class="game-project-detail-inner">
+        <div class="game-detail-rows" data-position="2" id="snake-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
           <img loading="lazy" decoding="async" src="images/SNAKE GAME_1.jpg" alt="Tank Game screenshot" />
@@ -341,9 +380,24 @@
             shaping a stronger focus on system boundaries and scalable game flow in later projects.</p>
         </div>
       </div>
-    </section>
+        </div>
+        </div>
+      </div>
+    </article>
 
-    <section class="projects-list" data-position="3" id="fighter-project">
+    <article class="game-project">
+      <button class="game-project-toggle" type="button" aria-expanded="false" aria-controls="fighter-detail">
+        <span class="game-project-thumb"><img loading="lazy" decoding="async" src="images/FIGHTER GAME_1.jpg" alt="" /></span>
+        <span class="game-project-text">
+          <span class="project-meta">2023, Game Design &amp; Development</span>
+          <span class="game-project-title">Street Fighter</span>
+          <span class="game-project-tag">Pygame · Python · State Machines</span>
+        </span>
+        <span class="game-project-icon" aria-hidden="true"></span>
+      </button>
+      <div class="game-project-detail" id="fighter-detail">
+        <div class="game-project-detail-inner">
+        <div class="game-detail-rows" data-position="3" id="fighter-project">
       <div class="project-row" data-position="1">
         <div class="project-media" data-from="left">
           <img loading="lazy" decoding="async" src="images/FIGHTER GAME_1.jpg" alt="Tank Game screenshot" />
@@ -417,6 +471,71 @@
             <p>Tightly coupling input and combat logic caused timing issues, reinforcing the need for clear state separation and clean control flow.</p>
         </div>
       </div>
+        </div>
+        </div>
+      </div>
+    </article>
+    </div>
+    </section>
+
+    <section class="category-section category-section--art" id="art">
+      <div class="category-header">
+        <p class="category-index">02 — Visual</p>
+        <h2>Art</h2>
+        <p class="projects-lede">Illustration, character studies, and digital paintings exploring colour, mood, and composition.</p>
+      </div>
+      <div class="media-grid media-grid--art">
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/SUISEI_1.jpg" alt="Digital painting" />
+          <figcaption class="media-caption"><strong>Hoshimachi Suisei</strong><span>Digital Painting</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/SUKUNA_LVL.jpg" alt="Character study" />
+          <figcaption class="media-caption"><strong>Sukuna</strong><span>Character Study</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/TM OPERA_1.jpg" alt="Illustration" />
+          <figcaption class="media-caption"><strong>世紀末霸者</strong><span>Illustration</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/SING_BEYOND.jpg" alt="Poster art" />
+          <figcaption class="media-caption"><strong>Sing Beyond</strong><span>Poster</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="category-section category-section--photo" id="photography">
+      <div class="category-header">
+        <p class="category-index">03 — Captured</p>
+        <h2>Photography</h2>
+        <p class="projects-lede">Moments from travels and everyday scenes — light, framing, and place.</p>
+      </div>
+      <div class="media-grid media-grid--photo">
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/PHOTOGRAPHY_1.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Gardens by the Bay</strong><span>2026</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/BEACH_1.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Silico Beach</strong><span>2025</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/PATH_1.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Flower Dome</strong><span>2025</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/BIKE_1.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Enoshima-Ohashi</strong><span>2024</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/AQUARIUM_1.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Osaka Aquarium</strong><span>2024</span></figcaption>
+        </figure>
+        <figure class="media-card">
+          <img loading="lazy" decoding="async" src="images/PHOTOGRAPHY_2.jpg" alt="Photograph" />
+          <figcaption class="media-caption"><strong>Bukit Batok</strong><span>2025</span></figcaption>
+        </figure>
+      </div>
     </section>
   </main>
 
@@ -448,6 +567,13 @@
       </div>
     </div>
   </footer>
+
+  <nav class="section-nav" aria-label="Project categories">
+    <span class="section-nav-indicator" aria-hidden="true"></span>
+    <a class="section-nav-link" href="#games">Games</a>
+    <a class="section-nav-link" href="#art">Art</a>
+    <a class="section-nav-link" href="#photography">Photography</a>
+  </nav>
 
   <script type="module" src="project-script.js"></script>
   <script type="module" src="script.js"></script>

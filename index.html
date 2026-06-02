@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Bokor&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Jura:wght@300..700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css" />
@@ -23,11 +23,13 @@
         </div>
       </div>
       <div class="nav-center">
-        <img loading="eager" decoding="async" class="nav-logo-img" src="images/LOGO.svg" alt="Logo" />
+        <img loading="eager" decoding="async" class="nav-logo-img nav-signature nav-signature--dark" src="images/Icons/signature.png" alt="Logo" />
+        <img loading="eager" decoding="async" class="nav-logo-img nav-signature nav-signature--white" src="images/Icons/signature [White].png" alt="" aria-hidden="true" />
       </div>
       <div class="nav-right">
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-          <img loading="eager" decoding="async" class="inactive" src="images/LOGO.svg" alt="Logo" />
+          <img loading="eager" decoding="async" class="inactive ev-static" src="images/Icons/EV_.svg" alt="Menu" />
+          <span class="ev-anim" aria-hidden="true"></span>
           <i class="close" aria-hidden="true">&times;</i>
         </button>
       </div>
@@ -38,7 +40,7 @@
         <a class="nav-link" href="index.html#">HOME</a>
         <div class="nav-item">
           <div class="nav-link-group">
-            <a class="nav-link" href="index.html#projects-anchor">PROJECTS</a>
+            <a class="nav-link" href="projects.html">PROJECTS</a>
             <button
               class="nav-subtoggle"
               type="button"
@@ -66,16 +68,23 @@
           <h1 class="introTitle">Crafting Playful Worlds Through Design & Art</h1>
           <div class="introParagraph">
             <p>
-              Hi, I'm Louis, a 2024 graduate of Republic Polytechnic with a Diploma in Digital Design 
-              and Development. I'm passionate about game design, where creativity meets logic. With a 
-              background in digital design, coding, photography, and data analysis, I enjoy crafting game 
+              Hi, I'm Louis, a 2024 graduate of Republic Polytechnic with a Diploma in Digital Design
+              and Development. I'm passionate about game design, where creativity meets logic. With a
+              background in digital design, coding, photography, and data analysis, I enjoy crafting game
               experiences that feel intuitive, engaging, and balanced
             </p>
           </div>
+          <a class="intro-cta" href="projects.html">
+            View Projects <span class="intro-cta-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
         <div class="imageContainer">
           <img loading="eager" decoding="async" fetchpriority="high" class="rectMaskImage" src="images/INTRO.jpg" alt="Intro visual" />
         </div>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">
+        <span class="scroll-cue-text">Scroll</span>
+        <span class="scroll-cue-arrow"></span>
       </div>
     </div>
     <div id="projects-anchor" class="projects-anchor" aria-hidden="true"></div>
@@ -200,10 +209,10 @@
         </div>
         <div class="horizontal-grid-row-2" data-position="6">
           <div class="grid-text">
-            <p>OSAKA AQUARIUM KAIYUKAN, 2024</p>
+            <p>TEMPOSAN, 2026</p>
           </div>
           <div class="grid-image">
-            <img loading="lazy" decoding="async" src="images/AQUARIUM_1.jpg" alt="test" />
+            <img loading="lazy" decoding="async" src="images/Bridge_1.jpg" alt="test" />
           </div>
         </div>
       </div>
@@ -231,10 +240,10 @@
       <div class="horizontal-grid-column">
         <div class="horizontal-grid-row" data-position="8">
           <div class="grid-text">
-            <p>ENOSHIMA-OHASHI, 2024</p>
+            <p>KATSURA RIVER, 2026</p>
           </div>
           <div class="grid-image">
-            <img loading="lazy" decoding="async" src="images/BIKE_1.jpg" alt="test" />
+            <img loading="lazy" decoding="async" src="images/Kyoto_1.jpg" alt="test" />
           </div>
         </div>
         <div class="horizontal-grid-row-2" data-position="8">
